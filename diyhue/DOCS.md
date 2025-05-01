@@ -1,4 +1,4 @@
-# Home Assistant Add-on: diyHue
+# Home Assistant Add-on: diyHue Bab Adam
 
 The Home Assistant diyHue Add-on allows users to run a fully working diyHue instance right inside Home Assistant. With this Add-on you can manage all your Genuine Hue Lightbulbs, Sensors and Switches aswell as add third-party devices right from inside Home Assistant.
 
