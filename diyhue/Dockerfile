@@ -28,20 +28,20 @@ RUN apk add --no-cache bluez
 RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/refs/heads/master.zip
 RUN unzip -qo diyhue.zip
 RUN rm diyhue.zip
-RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
+RUN pip3 install -r /diyHue/requirements.txt --no-cache-dir
 
 # Install diyHue
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/flaskUI /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/functions /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/lights /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/sensors /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueObjects /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/services /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/configManager /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/logManager /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueEmulator3.py /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf	/opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/flaskUI /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/functions /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/lights /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/sensors /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/HueObjects /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/services /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/configManager /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/logManager /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/HueEmulator3.py /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/githubInstall.sh /opt/hue-emulator/
+RUN cp -r /diyHue/BridgeEmulator/genCert.sh /BridgeEmulator/openssl.conf	/opt/hue-emulator/
 
 
 RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/archive/refs/heads/main.zip
@@ -51,7 +51,7 @@ RUN rm diyHueUI.zip
 RUN cp -r /diyhueUI/dist/index.html			/opt/hue-emulator/flaskUI/templates/
 RUN cp -r /diyhueUI/dist/assets			/opt/hue-emulator/flaskUI/
 RUN rm -r /diyhueUI
-RUN rm -r /diyHue-${DIYHUE_COMMIT}
+RUN rm -r /diyHue
 
 RUN apk --no-cache add --virtual build-deps gcc git make musl-dev \
 	&& git clone https://github.com/wolfcw/libfaketime \
