@@ -28,7 +28,6 @@ RUN apk add --no-cache bluez
 RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/refs/heads/master.zip
 RUN unzip -qo diyhue.zip
 RUN rm diyhue.zip
-RUN pip3 install -r /diyHue/requirements.txt --no-cache-dir
 
 # Install diyHue
 RUN cp -r /diyHue/BridgeEmulator/flaskUI /opt/hue-emulator/
