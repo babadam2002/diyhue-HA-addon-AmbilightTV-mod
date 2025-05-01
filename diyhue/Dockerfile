@@ -25,7 +25,7 @@ RUN apk add -q -u python3 openssl nmap psmisc iproute2 alpine-sdk build-base
 RUN apk add --no-cache bluez
 
 # Download diyhue and unzip it
-RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/${DIYHUE_COMMIT}.zip
+RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/refs/heads/master.zip
 RUN unzip -qo diyhue.zip
 RUN rm diyhue.zip
 RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
@@ -44,7 +44,7 @@ RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emul
 RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf	/opt/hue-emulator/
 
 
-RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/releases/download/${DIYHUE_UI_VERSION}/DiyHueUI-release.zip
+RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/archive/refs/heads/main.zip
 RUN mkdir /diyhueUI
 RUN unzip -qo diyHueUI.zip -d /diyhueUI
 RUN rm diyHueUI.zip
