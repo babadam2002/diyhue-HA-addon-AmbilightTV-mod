@@ -85,7 +85,7 @@ VOLUME ["/config"]
 
 # Labels
 LABEL \
-	io.hass.name="diyHue" \
+	io.hass.name="diyHue by Bab Adam" \
 	io.hass.description="Fully configurable diyHue Emulator" \
 	io.hass.arch="${BUILD_ARCH}" \
 	io.hass.type="addon" \
