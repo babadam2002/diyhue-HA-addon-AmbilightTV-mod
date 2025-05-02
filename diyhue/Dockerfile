@@ -31,17 +31,17 @@ RUN rm diyhue.zip
 RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
 
 # Install diyHue
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/flaskUI
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/functions
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/lights
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/sensors
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueObjects 
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/services 
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/configManager 
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/logManager 
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueEmulator3.py 
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/flaskUI /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/functions /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/lights /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/sensors /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueObjects /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/services /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/configManager /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/logManager /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueEmulator3.py /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf	/opt/hue-emulator/
 
 
 RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/releases/download/${DIYHUE_UI_VERSION}/DiyHueUI-release.zip
