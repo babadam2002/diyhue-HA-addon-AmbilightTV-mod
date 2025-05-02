@@ -1,8 +1,8 @@
 {
-    "name": "diyHue",
-    "version": "2.0.31",
+    "name": "diyHue by Adam",
+    "version": "2.0.4",
     "slug": "diyhue",
-    "description": "Emulate a Hue Bridge, add lights, sensors etc. from different vendors into one Ecosystem",
+    "description": "Emulate a Hue Bridge, add lights, sensors etc. from different vendors into one Ecosystem by Bab Adam",
     "webui": "http://[HOST]:[PORT:80]",
     "panel_icon": "mdi:home-lightbulb",
     "arch": [
