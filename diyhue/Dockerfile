@@ -13,7 +13,7 @@ ENV BUILD_ARCHI = ${BUILD_ARCH}
 # Other settings
 ENV LANG C.UTF-8
 ENV DIYHUE_VERSION=master
-ENV DIYHUE_COMMIT=a0f1584732b6eca3ae1ff7497c9a1039b9d396e6
+ENV DIYHUE_COMMIT=master
 ENV DIYHUE_UI_VERSION=v2.0.2
 ENV WORKING_DIR=/opt/hue-emulator
 
@@ -44,7 +44,7 @@ RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emul
 RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf	/opt/hue-emulator/
 
 
-RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/releases/download/${DIYHUE_UI_VERSION}/DiyHueUI-release.zip
+RUN curl -sL -o diyHueUI.zip https://www.github.com/diyhue/diyHueUI/releases/latest/download/DiyHueUI-release.zip
 RUN mkdir /diyhueUI
 RUN unzip -qo diyHueUI.zip -d /diyhueUI
 RUN rm diyHueUI.zip
