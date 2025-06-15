@@ -1,5 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base-python:5.3.4
-# hadolint ignore=DL3006
+ARG BUILD_FROM=python:3.10-alpine
 FROM ${BUILD_FROM}
 
 # Set shell
