@@ -14,7 +14,6 @@ ENV BUILD_ARCHI = ${BUILD_ARCH}
 ENV LANG C.UTF-8
 ENV DIYHUE_VERSION=master
 ENV DIYHUE_COMMIT=master
-ENV DIYHUE_UI_VERSION=v2.0.2
 ENV WORKING_DIR=/opt/hue-emulator
 
 # Create the needed folders
