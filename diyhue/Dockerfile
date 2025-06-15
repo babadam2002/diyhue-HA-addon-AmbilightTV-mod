@@ -1,90 +1,47 @@
 ARG BUILD_FROM=python:3.11-alpine
 FROM ${BUILD_FROM}
 
-# (A további részek maradnak ugyanazok)
-
-
-# Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Set the build architecture and convert it from hassio to diyhue style
-# armhf, armv7, aarch64, amd64, i386
 ARG BUILD_ARCH=aarch64
-ENV BUILD_ARCHI = ${BUILD_ARCH}
-
-# Other settings
+ENV BUILD_ARCH=${BUILD_ARCH}
 ENV LANG C.UTF-8
 ENV DIYHUE_VERSION=master
 ENV DIYHUE_COMMIT=master
 ENV WORKING_DIR=/opt/hue-emulator
 
-# Create the needed folders
-RUN mkdir diyhue config ${WORKING_DIR}
-
-# Install all needed dependencies
-RUN apk add -q -u python3 openssl nmap psmisc iproute2 alpine-sdk build-base
-RUN apk add --no-cache bluez
-
-# Download diyhue and unzip it
-RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/${DIYHUE_COMMIT}.zip
-RUN unzip -qo diyhue.zip
-RUN rm diyhue.zip
-RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
-
-# Install diyHue
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/flaskUI /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/functions /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/lights /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/sensors /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueObjects /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/services /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/configManager /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/logManager /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueEmulator3.py /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf	/opt/hue-emulator/
-
-
-RUN curl -sL -o diyHueUI.zip https://www.github.com/diyhue/diyHueUI/releases/latest/download/DiyHueUI-release.zip
-RUN mkdir /diyhueUI
-RUN unzip -qo diyHueUI.zip -d /diyhueUI
-RUN rm diyHueUI.zip
-RUN cp -r /diyhueUI/dist/index.html			/opt/hue-emulator/flaskUI/templates/
-RUN cp -r /diyhueUI/dist/assets			/opt/hue-emulator/flaskUI/
-RUN rm -r /diyhueUI
-RUN rm -r /diyHue-${DIYHUE_COMMIT}
-
-RUN apk --no-cache add --virtual build-deps gcc git make musl-dev \
-	&& git clone https://github.com/wolfcw/libfaketime \
-	&& cd libfaketime \
-	&& git checkout v0.9.10 \
-	&& make \
-	&& mv src/*.so* /lib && mv src/faketime /bin \
-	&& cd - \
-	&& rm -rf libfaketime \
-	&& apk del build-deps
-
-# Set working directory to the Archive folder
 WORKDIR /opt/hue-emulator
 
-# Copy additional local build files
+RUN mkdir -p diyhue config ${WORKING_DIR} && \
+    apk add --no-cache python3 py3-pip openssl nmap psmisc iproute2 alpine-sdk build-base bluez curl unzip && \
+    pip3 install --upgrade pip
+
+RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/${DIYHUE_COMMIT}.zip && \
+    unzip -qo diyhue.zip && rm diyhue.zip && \
+    pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
+
+# Másolás és jogok beállítása
+
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/* /opt/hue-emulator/ && \
+    curl -sL -o diyHueUI.zip https://www.github.com/diyhue/diyHueUI/releases/latest/download/DiyHueUI-release.zip && \
+    mkdir /diyhueUI && unzip -qo diyHueUI.zip -d /diyhueUI && rm diyHueUI.zip && \
+    cp -r /diyhueUI/dist/index.html /opt/hue-emulator/flaskUI/templates/ && \
+    cp -r /diyhueUI/dist/assets /opt/hue-emulator/flaskUI/ && \
+    rm -r /diyhueUI && \
+    rm -r /diyHue-${DIYHUE_COMMIT}
+
+RUN apk --no-cache add --virtual build-deps gcc git make musl-dev && \
+    git clone https://github.com/wolfcw/libfaketime && \
+    cd libfaketime && git checkout v0.9.10 && make && \
+    mv src/*.so* /lib && mv src/faketime /bin && cd - && \
+    rm -rf libfaketime && apk del build-deps
+
 COPY rootfs ./
 
-# Modify user rights of additional files
-RUN chmod +x ./select.sh ./genCert.sh && chmod a+x ./run.sh
+RUN chmod +x ./select.sh ./genCert.sh ./run.sh && ./select.sh
 
-# Sleect the right binaries depending on the arch
-RUN ./select.sh
-
-# Build arguments
-ARG BUILD_DATE
-ARG BUILD_REF
-ARG BUILD_VERSION
-
-## Document volume
 VOLUME ["/config"]
 
-# Labels
 LABEL \
 	io.hass.name="diyHue" \
 	io.hass.description="Fully configurable diyHue Emulator" \
