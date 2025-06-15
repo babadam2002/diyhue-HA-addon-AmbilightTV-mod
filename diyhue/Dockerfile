@@ -1,5 +1,8 @@
-ARG BUILD_FROM=python:3.10-alpine
+ARG BUILD_FROM=python:3.11-alpine
 FROM ${BUILD_FROM}
+
+# (A további részek maradnak ugyanazok)
+
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
