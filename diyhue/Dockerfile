@@ -7,7 +7,6 @@ ARG BUILD_ARCH=aarch64
 ENV BUILD_ARCH=${BUILD_ARCH}
 ENV LANG C.UTF-8
 ENV DIYHUE_VERSION=master
-ENV DIYHUE_COMMIT=master
 ENV WORKING_DIR=/opt/hue-emulator
 
 WORKDIR /opt/hue-emulator
@@ -16,19 +15,19 @@ RUN mkdir -p diyhue config ${WORKING_DIR} && \
     apk add --no-cache python3 py3-pip openssl nmap psmisc iproute2 alpine-sdk build-base bluez curl unzip && \
     pip3 install --upgrade pip
 
-RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/${DIYHUE_COMMIT}.zip && \
+RUN curl -sL -o diyhue.zip https://github.com/diyhue/diyHue/archive/master.zip && \
     unzip -qo diyhue.zip && rm diyhue.zip && \
-    pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
+    pip3 install -r /diyHue-master/requirements.txt --no-cache-dir
 
 # Másolás és jogok beállítása
 
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/* /opt/hue-emulator/ && \
+RUN cp -r /diyHue-master/BridgeEmulator/* /opt/hue-emulator/ && \
     curl -sL -o diyHueUI.zip https://www.github.com/diyhue/diyHueUI/releases/latest/download/DiyHueUI-release.zip && \
     mkdir /diyhueUI && unzip -qo diyHueUI.zip -d /diyhueUI && rm diyHueUI.zip && \
     cp -r /diyhueUI/dist/index.html /opt/hue-emulator/flaskUI/templates/ && \
     cp -r /diyhueUI/dist/assets /opt/hue-emulator/flaskUI/ && \
     rm -r /diyhueUI && \
-    rm -r /diyHue-${DIYHUE_COMMIT}
+    rm -r /diyHue-master
 
 RUN apk --no-cache add --virtual build-deps gcc git make musl-dev && \
     git clone https://github.com/wolfcw/libfaketime && \
