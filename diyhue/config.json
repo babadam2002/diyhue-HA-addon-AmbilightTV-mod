@@ -1,6 +1,6 @@
 {
-    "name": " Diyhue for Ambilight+hue",
-    "version": "1.0",
+    "name": "Diyhue for Ambilight+hue",
+    "version": "2.31",
     "slug": "Diyhue",
     "description": "Diyhue Bridge Background Light OFF for Ambilight+hue",
     "webui": "http://[HOST]:[PORT:80]",
