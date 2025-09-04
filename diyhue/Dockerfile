@@ -28,32 +28,31 @@ RUN apk add --no-cache bluez
 RUN curl -sL -o diyhue.zip https://github.com/babadam2002/diyHue/archive/${DIYHUE_COMMIT}.zip
 RUN unzip -qo diyhue.zip
 RUN rm diyhue.zip
-RUN pip3 install -r diyhue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
+RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
 
 # Install diyHue
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/flaskUI /opt/hue-emulator/
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/functions /opt/hue-emulator/
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/lights /opt/hue-emulator/
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/sensors /opt/hue-emulator/
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/HueObjects /opt/hue-emulator/
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/services /opt/hue-emulator/
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/configManager /opt/hue-emulator/
-RUN cp -r diyhue-${DIYHUE_COMMIT}/BridgeEmulator/logManager /opt/hue-emulator/
-RUN cp diyhue-${DIYHUE_COMMIT}/BridgeEmulator/HueEmulator3.py /opt/hue-emulator/
-RUN cp diyhue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emulator/
-RUN cp diyhue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh diyhue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/flaskUI /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/functions /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/lights /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/sensors /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueObjects /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/services /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/configManager /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/logManager /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueEmulator3.py /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emulator/
+RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf	/opt/hue-emulator/
 
-# Download UI
+
 RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/releases/download/${DIYHUE_UI_VERSION}/DiyHueUI-release.zip
 RUN mkdir /diyhueUI
 RUN unzip -qo diyHueUI.zip -d /diyhueUI
 RUN rm diyHueUI.zip
-RUN cp /diyhueUI/dist/index.html /opt/hue-emulator/flaskUI/templates/
-RUN cp -r /diyhueUI/dist/assets /opt/hue-emulator/flaskUI/
+RUN cp -r /diyhueUI/dist/index.html			/opt/hue-emulator/flaskUI/templates/
+RUN cp -r /diyhueUI/dist/assets			/opt/hue-emulator/flaskUI/
 RUN rm -r /diyhueUI
-RUN rm -r diyhue-${DIYHUE_COMMIT}
+RUN rm -r /diyHue-${DIYHUE_COMMIT}
 
-# Build libfaketime
 RUN apk --no-cache add --virtual build-deps gcc git make musl-dev \
 	&& git clone https://github.com/wolfcw/libfaketime \
 	&& cd libfaketime \
@@ -73,7 +72,7 @@ COPY rootfs ./
 # Modify user rights of additional files
 RUN chmod +x ./select.sh ./genCert.sh && chmod a+x ./run.sh
 
-# Select the right binaries depending on the arch
+# Sleect the right binaries depending on the arch
 RUN ./select.sh
 
 # Build arguments
@@ -104,4 +103,4 @@ LABEL \
 	org.opencontainers.image.revision=${BUILD_REF} \
 	org.opencontainers.image.version=${BUILD_VERSION}
 
-CMD ["./run.sh"]
+CMD [ "./run.sh" ]
