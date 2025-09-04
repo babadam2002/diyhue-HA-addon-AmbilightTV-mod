@@ -48,7 +48,7 @@ RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/releases/downloa
 RUN mkdir /diyhueUI
 RUN unzip -qo diyHueUI.zip -d /diyhueUI
 RUN rm diyHueUI.zip
-RUN cp -r /diyhueUI/dist/index.html			/opt/hue-emulator/flaskUI/templates/
+RUN cp /diyhueUI/dist/index.html /opt/hue-emulator/flaskUI/templates/index.html
 RUN cp -r /diyhueUI/dist/assets			/opt/hue-emulator/flaskUI/
 RUN rm -r /diyhueUI
 RUN rm -r /diyHue-${DIYHUE_COMMIT}
