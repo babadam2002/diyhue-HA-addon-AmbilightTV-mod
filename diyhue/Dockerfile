@@ -25,7 +25,7 @@ RUN apk add -q -u python3 openssl nmap psmisc iproute2 alpine-sdk build-base
 RUN apk add --no-cache bluez
 
 # Download diyhue and unzip it
-RUN curl -sL -o diyhue.zip https://github.com/babadam2002/${DIYHUE_COMMIT}/archive/refs/heads/main.zip.zip
+RUN curl -sL -o diyhue.zip https://github.com/babadam2002/${DIYHUE_COMMIT}/archive/refs/heads/main.zip
 RUN unzip -qo diyhue.zip
 RUN rm diyhue.zip
 RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
