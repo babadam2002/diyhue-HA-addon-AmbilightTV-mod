@@ -13,7 +13,7 @@ ENV BUILD_ARCHI = ${BUILD_ARCH}
 # Other settings
 ENV LANG C.UTF-8
 ENV DIYHUE_VERSION=master
-ENV DIYHUE_COMMIT=Diyhue---Background-Light-OFF-for-Ambilight-hue-by-Bab-Adam/archive/refs/heads/main
+ENV DIYHUE_COMMIT=diyhue_ambilight_hue
 ENV DIYHUE_UI_VERSION=v2.0.3
 ENV WORKING_DIR=/opt/hue-emulator
 
@@ -25,7 +25,7 @@ RUN apk add -q -u python3 openssl nmap psmisc iproute2 alpine-sdk build-base
 RUN apk add --no-cache bluez
 
 # Download diyhue and unzip it
-RUN curl -sL -o diyhue.zip https://github.com/babadam2002/${DIYHUE_COMMIT}.zip
+RUN curl -sL -o diyhue.zip https://github.com/babadam2002/${DIYHUE_COMMIT}/archive/refs/heads/main.zip.zip
 RUN unzip -qo diyhue.zip
 RUN rm diyhue.zip
 RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
