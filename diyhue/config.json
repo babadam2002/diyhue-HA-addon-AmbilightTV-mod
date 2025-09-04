@@ -1,8 +1,8 @@
 {
-    "name": "Diyhue for Ambilight+hue",
-    "version": "2.31",
-    "slug": "Diyhue",
-    "description": "Diyhue Bridge Background Light OFF for Ambilight+hue",
+    "name": "diyHue",
+    "version": "2.0.31",
+    "slug": "diyhue",
+    "description": "Emulate a Hue Bridge, add lights, sensors etc. from different vendors into one Ecosystem",
     "webui": "http://[HOST]:[PORT:80]",
     "panel_icon": "mdi:home-lightbulb",
     "arch": [
