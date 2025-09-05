@@ -1,12 +1,10 @@
 ARG BUILD_FROM=python:3.11-alpine
-# hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Set the build architecture and convert it from hassio to diyhue style
-# armhf, armv7, aarch64, amd64, i386
+# Build architecture
 ARG BUILD_ARCH=aarch64
 ENV BUILD_ARCHI=${BUILD_ARCH}
 
@@ -17,68 +15,60 @@ ENV DIYHUE_COMMIT=9604db9241605a2f3ae4b5504ce3c4c3ea29ec6f
 ENV DIYHUE_UI_VERSION=v2.0.3
 ENV WORKING_DIR=/opt/hue-emulator
 
-# Create the needed folders
+# Create folders
 RUN mkdir -p diyhue config ${WORKING_DIR}
 
-# Install all needed dependencies
-RUN apk add -q -u python3 openssl nmap psmisc iproute2 alpine-sdk build-base
-RUN apk add --no-cache bluez
+# Install dependencies
+RUN apk add -q -u python3 openssl nmap psmisc iproute2 alpine-sdk build-base \
+    && apk add --no-cache bluez bash curl unzip git make musl-dev gcc
 
-# Download diyhue and unzip it
+# Upgrade pip
+RUN python -m pip install --upgrade pip
+
+# Download diyHue and unzip
 RUN curl -sL -o diyhue.zip https://github.com/babadam2002/diyHue/archive/${DIYHUE_COMMIT}.zip
 RUN unzip -qo diyhue.zip
 RUN rm diyhue.zip
-RUN pip3 install -r /diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
+RUN pip install -r diyHue-${DIYHUE_COMMIT}/requirements.txt --no-cache-dir
 
-# Install diyHue
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/flaskUI /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/functions /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/lights /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/sensors /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueObjects /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/services /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/configManager /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/logManager /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/HueEmulator3.py /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/githubInstall.sh /opt/hue-emulator/
-RUN cp -r /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/genCert.sh /diyHue-${DIYHUE_COMMIT}/BridgeEmulator/openssl.conf /opt/hue-emulator/
+# Copy diyHue files
+RUN cp -r diyHue-${DIYHUE_COMMIT}/BridgeEmulator/* ${WORKING_DIR}/
 
-# Download and install diyHue UI
+# Download and unzip UI
 RUN curl -sL -o diyHueUI.zip https://github.com/diyhue/diyHueUI/releases/download/${DIYHUE_UI_VERSION}/DiyHueUI-release.zip
 RUN mkdir -p /diyhueUI
 RUN unzip -qo diyHueUI.zip -d /diyhueUI
 RUN rm diyHueUI.zip
 
-# Create templates folder and copy index.html
-RUN mkdir -p /opt/hue-emulator/flaskUI/templates
-RUN cp /diyhueUI/dist/index.html /opt/hue-emulator/flaskUI/templates/index.html
+# Ensure templates directory exists
+RUN mkdir -p ${WORKING_DIR}/flaskUI/templates
 
-# Copy assets
-RUN cp -r /diyhueUI/dist/assets /opt/hue-emulator/flaskUI/
+# Copy UI files
+RUN cp /diyhueUI/dist/index.html ${WORKING_DIR}/flaskUI/templates/index.html
+RUN cp -r /diyhueUI/dist/assets ${WORKING_DIR}/flaskUI/
 RUN rm -r /diyhueUI
-RUN rm -r /diyHue-${DIYHUE_COMMIT}
 
-# Install libfaketime
+# Clean up diyHue source
+RUN rm -r diyHue-${DIYHUE_COMMIT}
+
+# Optional: install libfaketime
 RUN apk --no-cache add --virtual build-deps gcc git make musl-dev \
     && git clone https://github.com/wolfcw/libfaketime \
-    && cd libfaketime \
-    && git checkout v0.9.10 \
-    && make \
+    && cd libfaketime && git checkout v0.9.10 && make \
     && mv src/*.so* /lib && mv src/faketime /bin \
-    && cd - \
-    && rm -rf libfaketime \
+    && cd - && rm -rf libfaketime \
     && apk del build-deps
 
-# Set working directory to the Archive folder
-WORKDIR /opt/hue-emulator
+# Set working directory
+WORKDIR ${WORKING_DIR}
 
 # Copy additional local build files
 COPY rootfs ./
 
-# Modify user rights of additional files
+# Modify permissions
 RUN chmod +x ./select.sh ./genCert.sh && chmod a+x ./run.sh
 
-# Select the right binaries depending on the arch
+# Select the right binaries depending on architecture
 RUN ./select.sh
 
 # Build arguments
@@ -109,4 +99,5 @@ LABEL \
     org.opencontainers.image.revision=${BUILD_REF} \
     org.opencontainers.image.version=${BUILD_VERSION}
 
-CMD [ "./run.sh" ]
+CMD ["./run.sh"]
+
