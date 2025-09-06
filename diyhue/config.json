@@ -1,5 +1,5 @@
 {
-    "name": "diyHue Ambilight*hue mod"
+    "name": "diyHue"
     "version": "2.0.33",
     "slug": "diyhue",
     "description": "Emulate Hue Bridge, Ambilight+hue Background Light OFF by default.",
