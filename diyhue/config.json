@@ -1,6 +1,6 @@
 {
     "name": "diyHue",
-    "version": "2.0.34",
+    "version": "2.0.35",
     "slug": "diyhue",
     "description": "Emulate Hue Bridge, Ambilight+hue Background Light OFF by default.",
     "webui": "http://[HOST]:[PORT:80]",
