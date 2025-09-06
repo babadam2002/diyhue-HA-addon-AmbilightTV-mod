@@ -5,3 +5,4 @@ All notable changes to this project will be documented in this file. The format 
 ## [2.0.33 - 06.09.2025]
 ### update
     - Ambilight+hue Background Light OFF by default.
+    - Govee support.
