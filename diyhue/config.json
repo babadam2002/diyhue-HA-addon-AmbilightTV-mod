@@ -1,6 +1,6 @@
 {
     "name": "diyHue",
-    "version": "2.0.52",
+    "version": "2.0.55",
     "slug": "diyhue",
     "description": "Emulate a Hue Bridge, AmbilightTV Background Light OFF",
     "webui": "http://[HOST]:[PORT:80]",
@@ -29,7 +29,10 @@
         "no_serve_https": false,
         "http_port": 80,
         "https_port": 443,
-        "ip": ""
+        "ip": "",
+        "min_brightness_threshold": 35,
+        "Entertainment_Area_Extender_udp_ip": "",
+        "Entertainment_Area_Extender_udp_port": 12345
     },
     "schema": {
         "config_path": "str",
@@ -38,6 +41,9 @@
         "no_serve_https": "bool",
         "http_port": "int",
         "https_port": "int",
-        "ip": "str"
+        "ip": "str",
+        "min_brightness_threshold": "int",
+        "Entertainment_Area_Extender_udp_ip": "str",
+        "Entertainment_Area_Extender_udp_port": "int"
     }
 }
