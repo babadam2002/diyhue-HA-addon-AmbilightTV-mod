@@ -17,7 +17,7 @@ The installation process is pretty easy and straight forward, like for any other
 
 Add the repository URL under **Supervisor → Add-on store → ⋮ → Manage add-on repositories**:
 
-    https://github.com/diyhue/hassio-addon](https://github.com/babadam2002/diyhue-HA-addon-AmbilightTV-mod
+    https://github.com/babadam2002/diyhue-HA-addon-AmbilightTV-mod
 
 
 ## Usage
