@@ -1,8 +1,8 @@
 {
     "name": "diyHue",
-    "version": "2.0.55",
+    "version": "2.0.56",
     "slug": "diyhue",
-    "description": "Emulate a Hue Bridge, AmbilightTV Background Light OFF",
+    "description": "Emulate a Hue Bridge, AmbilightTV Background Light OFF + Entertainment Area Extender (need another HA addon)",
     "webui": "http://[HOST]:[PORT:80]",
     "panel_icon": "mdi:home-lightbulb",
     "arch": [
@@ -45,5 +45,12 @@
         "min_brightness_threshold": "int",
         "Entertainment_Area_Extender_udp_ip": "str",
         "Entertainment_Area_Extender_udp_port": "int"
+    }
+        },
+    "placeholder": {
+        "min_brightness_threshold": "Black level for AmbilightTV + Hue. Minimum level 35 for black background",
+        "Entertainment_Area_Extender_udp_ip": "Ip adress for Entertainment Area Extender plugin by default your HA adress without port e.g. 192.168.0.10",
+        "Entertainment_Area_Extender_udp_port": "UDP port for Entertainment Area Extender plugin by default: 12345)"
+
     }
 }
