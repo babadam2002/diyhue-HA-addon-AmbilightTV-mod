@@ -1,8 +1,8 @@
 {
     "name": "diyHue",
-    "version": "2.0.60",
+    "version": "2.0.56",
     "slug": "diyhue",
-    "description": "Emulate a Hue Bridge, AmbilightTV Background Light OFF, Entertainment Area Extender (need another HA addon)",
+    "description": "Emulate a Hue Bridge, AmbilightTV Background Light OFF, Entertainment Area Extender need another HA addon",
     "webui": "http://[HOST]:[PORT:80]",
     "panel_icon": "mdi:home-lightbulb",
     "arch": [
