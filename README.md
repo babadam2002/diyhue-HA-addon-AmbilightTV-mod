@@ -2,7 +2,7 @@
 <img src="https://github.com/diyhue/hassio-addon/blob/master/images/diyhue-hassio.png">
 <h1>Home Assistant Add-on: diyHue</h1>
 <br>
-<p>Run <a href="https://diyhue.org">diyHue</a> as a Home Assistant Add-on</p>
+<p>Run <a href="">diyHue</a> as a Home Assistant Add-on</p>
 <a href="https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdiyhue%2Fhassio-addon"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg"></a>
 </div>
 
@@ -29,71 +29,17 @@ Add the repository URL under **Supervisor → Add-on store → ⋮ → Manage ad
 
     https://github.com/diyhue/hassio-addon
 
-To use the Dev bransh add `#dev` to the url, before using the dev bransh you need to remove your current config files to prevent errors, also when moving back to master you need to remove your dev config, be aware this is still in development and problems may occur.
 
-    https://github.com/diyhue/hassio-addon#dev
+## Options
 
-## Changelog
+- `min_brightness_threshold`: Black level for AmbilightTV + Hue. Minimum 35 recommended. AmbilightTv have one problem, that the backgound minimum light is always on, this will turn it off.
+- `Entertainment_Area_Extender_udp_ip`: IP address for the plugin. Usually your HA IP without port. You need to install the Entertainment Area Extender addon  for diyhue-HA-addon-AmbilightTV-mod addon.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
+- `Entertainment_Area_Extender_udp_port`: UDP port. Default is 12345.
 
-All notable changes to this project will be documented in the [CHANGELOG.md][changelog] file.
+## Usage
 
-Version for releases is based on [diyHue](https://github.com/diyhue/diyHue) format: `X.Y.Z`.
-
-Any changes on the addon that do not require a new version of [diyHue](https://github.com/diyhue/diyHue) will use the format: `X.Y.Z.A` where `X.Y.Z` is fixed on the diyHue release version and `A` is related to the addon.
-
-Edge version will not maintain a CHANGELOG and doesn't have a version.
-
-## Issues
-
-If you find any issues with the add-on, please check the [issue tracker](https://github.com/MaxBec/hassio-diyHue/issues) for similar issues before creating one. If your issue is regarding specific devices or, more generally, an issue that arises after diyHue has successfully started, it should
-likely be reported in the [diyHue issue tracker](https://github.com/diyhue/diyHue/issues).
-
-Feel free to create a PR for fixes and enhancements.
-
-## Support
-
-All documentation and instructions can be found over at [diyhue.readthedocs.io](https://diyhue.readthedocs.io/)
-
-If you need help with diyHue you can get support from other users, aswell as the maintainer.
-
-Please use GitHub, Slack or Discourse, other platforms are not checked by the maintainers.
-
-### Slack [![JoinSlack](https://img.shields.io/badge/Join%20us-on%20Slack-green.svg)](https://diyhue.slack.com/) [![SlackStatus](https://slackinvite.squishedmooo.com/badge.svg?colorB=8ebc06)](https://slackinvite.squishedmooo.com/)
-
-Use Slack for a general chat or fast live support.
-
-However: Since Slack is faster at providing live Support but not as good when it comes to save and show known Issues, we kindly ask you to open a Topic at our Discourse group. This will provide Help for others in the future.
-
-### Discourse [![Discourse](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiyhue.discourse.group)](https://diyhue.discourse.group)
-
-Our Board might already have your fix and answer ready. Have a look!
-
-> General Note: Please provide some Logs to make it easier for all of us. Enable Debug by manually starting diyHue with additional `--debug true` argument.
-
-<!--## Stability
-
-Starting in Dec. 2020 we will introduce one Master and one Dev Branch. The Master will have the most stable code.
-
-If you want to tinker and experiment you can try the dev Branch. Active development will take place here.
-
-You want to get the latest features? Try the experimental Branch. Use at own Risk!
-
--->
-
-<!-- All the lights in my house are controlled by this solution so the stability is very important to me as there is no turning back to classic illumination (all switches were replaced with Ikea Trådfri Remotes and holes covered). However, I don't use all the functions, so I'm unable to perform full tests on every change. What I do currently use is Deconz with all Trådfri devices (lights + sensors), Xiaomi Motion Sensor, native ESP8266 bulbs, ESP8266 + WS2812B strips, and Xiaomi YeeLight color bulbs. -->
-
-
-Please post on our [Slack team](https://slackinvite.squishedmooo.com/) any other device/application that you find to work with this emulator.
-
-<!-- [![Youtube Demo](https://img.youtube.com/vi/c6MsG3oIehY/0.jpg)](https://www.youtube.com/watch?v=c6MsG3oIehY)
-
-
-<!-- ## qtHue
-
-<!-- You also may want to see my new project [qtHue](https://github.com/mariusmotea/qtHue) that provides a simple user interface for controlling the lights.
-![qtHue](https://github.com/mariusmotea/qtHue/blob/master/Screenshot.png?raw=true) -->
+- Set these options in the Home Assistant addon UI under "Configuration".
 
 ## Contribute
 
