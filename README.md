@@ -3,19 +3,9 @@
 <h1>Home Assistant Add-on: diyHue</h1>
 <br>
 <p>Run <a href="">diyHue</a> as a Home Assistant Add-on</p>
-<a href="https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fdiyhue%2Fhassio-addon"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg"></a>
+<a href="https://github.com/babadam2002/diyhue-HA-addon-AmbilightTV-mod"><img src="https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg"></a>
 </div>
 
-## About
-
-diyHue provides a Ecosystem for several Smart Home Solutions, eliminating the need for vendor specific Bridges and Hardware. Written in Python and Open Source, you are now able to import and control all your Lights and Sensors into one System. Lightweight and resource friendly, to run on small
-devices like the RPi .... 24/7
-
-The Best part? No Cloud connection by Design!
-
-Enjoy your diyHue enlighted Home.
-
-If you've found the Add-on helpful or useful, then please consider throwing a coffee my way to help support my work. As i am a student and would like to invest more time and effort in this project this would really help me:
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/diyhue)
 
