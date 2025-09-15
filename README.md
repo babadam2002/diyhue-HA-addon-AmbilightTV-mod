@@ -23,7 +23,7 @@ Add the repository URL under **Supervisor → Add-on store → ⋮ → Manage ad
 ## Usage
 - Set these options in the Home Assistant addon UI under "Configuration".
 - `min_brightness_threshold`: Black level for AmbilightTV + Hue. Minimum 35 recommended. AmbilightTv have one problem, that the backgound minimum light is always on, this will turn it off.
-- `Entertainment_Area_Extender_udp_ip`: IP address for the plugin. Usually your HA IP without port. You need to install the Entertainment Area Extender addon  for diyhue-HA-addon-AmbilightTV-mod addon.
+- `Entertainment_Area_Extender_udp_ip`: Usually your HA IP without port. You need to install the Entertainment Area Extender addon  for diyhue-HA-addon-AmbilightTV-mod addon.
 
 - `Entertainment_Area_Extender_udp_port`: UDP port. Default is 12345.
 
