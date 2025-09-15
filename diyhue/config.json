@@ -45,11 +45,11 @@
         "min_brightness_threshold": "int",
         "Entertainment_Area_Extender_udp_ip": "str",
         "Entertainment_Area_Extender_udp_port": "int"
-    }
-        },
+    },
     "placeholder": {
         "min_brightness_threshold": "Black level for AmbilightTV + Hue. Minimum level 35 for black background",
-        "Entertainment_Area_Extender_udp_ip": "Ip adress for Entertainment Area Extender plugin by default your HA adress without port e.g. 192.168.0.10",
-        "Entertainment_Area_Extender_udp_port": "UDP port for Entertainment Area Extender plugin by default: 12345)"
-
+        "Entertainment_Area_Extender_udp_ip": "IP address for Entertainment Area Extender plugin, default your HA address without port e.g. 192.168.0.10",
+        "Entertainment_Area_Extender_udp_port": "UDP port for Entertainment Area Extender plugin, default: 12345"
     }
+}
+
