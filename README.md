@@ -8,6 +8,8 @@
 
 ## Support the real diyHue!
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/diyhue)
+## Support Me!
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/babadam)
 
 ![diyHue ecosystem][img-ecosystem]
 
