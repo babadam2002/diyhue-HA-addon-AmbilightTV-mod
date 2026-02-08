@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base-python:5.3.4
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-python:15.0.0
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
 
@@ -13,7 +13,7 @@ ENV BUILD_ARCHI = ${BUILD_ARCH}
 # Other settings
 ENV LANG C.UTF-8
 ENV DIYHUE_VERSION=master
-ENV DIYHUE_COMMIT=2bff0abeef10afb678243ef609219abfcf20bdc9
+ENV DIYHUE_COMMIT=5ea1aa6be49a77f59fcc7693edb6577094555efb
 ENV DIYHUE_UI_VERSION=v2.0.3
 ENV WORKING_DIR=/opt/hue-emulator
 
