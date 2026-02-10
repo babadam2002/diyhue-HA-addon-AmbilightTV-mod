@@ -18,7 +18,8 @@ WORKDIR ${WORKING_DIR}
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy addon run script
-COPY run.sh /run.sh
-RUN chmod a+x /run.sh
+COPY rootfs/ /
+
+RUN chmod +x /run.sh
 
 CMD [ "/run.sh" ]
